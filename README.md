@@ -1,4 +1,4 @@
-# 星轨节拍 / Orbit Beats V1.1
+# 星轨节拍 / Orbit Beats V1.2
 
 An original small browser instrument: edit four 16-step tracks, see a constellation, preview synthesized sound and export PCM WAV or a matching PNG. No AI API, samples, microphone or network.
 
