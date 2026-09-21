@@ -1,6 +1,6 @@
 # Verification — 2026-09-22
 
-Actual local Chromium browser and Node checks: 8 groups passed. Run `PLAYWRIGHT_MODULE=<installed playwright module> node test.cjs` (set environment variables using your shell's syntax). No production dependencies are required by the tool.
+V1.1 actual local Chromium browser and Node checks: 15 groups passed (8 existing + 7 project persistence). Run `PLAYWRIGHT_MODULE=<installed playwright module> node test.cjs` and `node test-project.cjs` with the same environment variable (set it using your shell's syntax). No production dependencies are required by the tool.
 
 - Deterministic synthesis, silence, full-density peak bound and duration.
 - Invalid inputs rejected; independent PCM WAV header/length checks.
@@ -11,6 +11,16 @@ Actual local Chromium browser and Node checks: 8 groups passed. Run `PLAYWRIGHT_
 - Clear exports zero-valued PCM; reset restores the example.
 - 390px narrow layout, offline operation, no HTTP requests, no storage and no page errors.
 
-First browser run found narrow-screen overflow. Repair round 1 added `min-width:0` to grid children; rerun passed. Desktop screenshot visually inspected. No source changes after passing run except this report.
+Additional V1.1 checks passed:
+
+- JSON round trip, BOM handling and defensive deep copy.
+- Schema bounds, unknown/prototype fields, sparse arrays and malformed data rejected.
+- Actual JSON download and reimport restores the exact UI state without autoplay.
+- Cancel, malformed JSON, wrong version, oversized file and unsupported extension preserve current work.
+- Valid import stops old playback and replaces controls.
+- Delayed read plus intervening edit refuses stale import.
+- 390px layout, offline zero HTTP requests, no storage or page errors.
+
+V1 narrow-screen repair was retained. Both test suites were executed against the V1.1 candidate; the project desktop screenshot was visually inspected, including the deliberate stale-import rejection. Quality method: deterministic tests plus same-agent source/visual review. No cross-model review claimed. Only documentation changed after the passing run.
 
 Not verified: physical speaker output, human listening quality, Android/iOS hardware, Safari or Firefox. A browser AudioContext test is not an acoustic listening test. No commercial demand or customer acceptance is claimed. This was a deterministic test plus same-agent source/visual inspection, not independent cross-model review.
