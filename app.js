@@ -14,4 +14,4 @@ function download(blob,name){const url=URL.createObjectURL(blob),a=document.crea
 $('wav').onclick=()=>{try{const d=data();download(new Blob([OrbitSound.wav(d.pcm,d.rate)],{type:'audio/wav'}),'orbit-beats.wav');tell('已请求保存WAV，固定合成音量；播放文件前请调低设备音量。');}catch(e){tell('导出失败：'+e.message);}};
 $('png').onclick=()=>$('orbit').toBlob(b=>{if(b)download(b,'orbit-beats.png');},'image/png');
 $('clear').onclick=()=>{if(!confirm('清空全部节拍？'))return;pattern=Array.from({length:4},()=>Array(16).fill(false));grid();edit();};$('reset').onclick=()=>{if(!confirm('恢复示例，替换当前节拍？'))return;pattern=defaultPattern();grid();edit();};$('new').onclick=()=>{if(!confirm('用随机节拍替换当前编辑？'))return;const a=new Uint32Array(64);crypto.getRandomValues(a);pattern=Array.from({length:4},(_,r)=>Array.from({length:16},(_,c)=>a[r*16+c]%5===0));grid();edit();};
-window.addEventListener('pagehide',()=>{stop();if(audio)audio.close();});grid();draw();
+window.addEventListener('pagehide',()=>{stop();const retiring=audio;audio=null;if(retiring&&retiring.state!=='closed')retiring.close().catch(()=>{});});grid();draw();

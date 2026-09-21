@@ -2,7 +2,7 @@
 // No autosave. Files are parsed as bounded data, never as source code.
 let projectRevision=0,importSequence=0;
 const controls=document.createElement('section');controls.className='project-controls';
-const projectHeading=document.createElement('h3');projectHeading.textContent='把编排带走 · V1.1';
+const projectHeading=document.createElement('h3');projectHeading.textContent='把编排带走 · V1.2';
 const projectHint=document.createElement('p');projectHint.className='hint';projectHint.textContent='手动保存JSON作品可继续编辑；它不是音频。载入最多8 KiB的JSON，校验通过并确认后才替换当前编排。不会自动保存或自动播放。';
 const projectSave=document.createElement('button');projectSave.id='saveProject';projectSave.textContent='保存作品 JSON';
 const projectLabel=document.createElement('label');projectLabel.textContent='载入作品 JSON';

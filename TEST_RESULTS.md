@@ -24,3 +24,8 @@ Additional V1.1 checks passed:
 V1 narrow-screen repair was retained. Both test suites were executed against the V1.1 candidate; the project desktop screenshot was visually inspected, including the deliberate stale-import rejection. Quality method: deterministic tests plus same-agent source/visual review. No cross-model review claimed. Only documentation changed after the passing run.
 
 Not verified: physical speaker output, human listening quality, Android/iOS hardware, Safari or Firefox. A browser AudioContext test is not an acoustic listening test. No commercial demand or customer acceptance is claimed. This was a deterministic test plus same-agent source/visual inspection, not independent cross-model review.
+# V1.2 targeted regression — 2026-09-22
+
+Four groups passed in desktop Chromium 151.0.7922.34 using native AudioContext and synthetic pagehide/pageshow events: context closure; no autoplay or pattern loss on restoration; manual preview recreation and stop; unchanged JSON download and zero application HTTP(S) requests. A separate deterministic audio double reproduced the V1.1 closed-context failure and passed after the patch.
+
+`node test-lifecycle.cjs` uses an existing Playwright installation via PLAYWRIGHT_MODULE. No dependency installation is required for end users. Actual browser navigation/back-forward-cache eligibility, physical sound, Android and other engines were NOT tested. Prior tests below are inherited evidence; the unchanged synthesis, image export and schema suites were not rerun. GitHub publication of V1.2 is pending at this checkpoint.

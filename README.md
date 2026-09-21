@@ -24,3 +24,6 @@ V1.1 接受本工具格式的 `.json` 文件，最多 8 KiB；仅允许四轨十
 Research checked 2026-09-22. These precedents mean this is not an original market category or proven commercial opportunity. This experiment deliberately stays dependency-free with mathematical tones and deterministic PCM export.
 
 No reuse license chosen for initial publication. System fonts only. See TEST_RESULTS.md for actual verification and limitations.
+# V1.2 audio lifecycle fix
+
+When the page is hidden, playback stops and its audio context is detached before closing. A later manual preview creates a fresh context instead of reusing a closed one. Returning never starts playback automatically. Saved project format and synthesis/export engine are unchanged. A synthetic page-lifecycle regression is tested; actual browser back-forward cache eligibility and physical speakers are not certified.

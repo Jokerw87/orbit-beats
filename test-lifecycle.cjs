@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),{pathToFileURL}=require('node:url');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
+(async()=>{const browser=await chromium.launch({headless:true});try{const page=await browser.newPage({acceptDownloads:true}),requests=[];page.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url());});await page.goto(pathToFileURL(path.join(__dirname,'index.html')).href);
+await page.click('#play');await page.waitForFunction(()=>audio?.state==='running');
+const before=await page.evaluate(()=>{window.oldContext=audio;return JSON.stringify(pattern);});
+await page.evaluate(()=>dispatchEvent(new PageTransitionEvent('pagehide',{persisted:true})));
+await page.waitForFunction(()=>oldContext.state==='closed');assert.equal(await page.evaluate(()=>audio),null);
+await page.evaluate(()=>dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true})));
+assert.equal(await page.evaluate(()=>source),null);assert.equal(await page.evaluate(()=>JSON.stringify(pattern)),before);
+await page.click('#play');await page.waitForFunction(()=>audio?.state==='running');assert.equal(await page.evaluate(()=>audio!==oldContext),true);
+await page.click('#stop');assert.equal(await page.evaluate(()=>source),null);
+const download=page.waitForEvent('download');await page.click('#saveProject');const file=await download;const saved=JSON.parse(fs.readFileSync(await file.path(),'utf8'));assert.equal(saved.format,'orbit-beats-project');assert.equal(JSON.stringify(saved.pattern),before);
+assert.equal(requests.length,0);
+const out=path.join(__dirname,'test-output','lifecycle.json');if(fs.existsSync(out))throw Error('Evidence exists');fs.mkdirSync(path.dirname(out),{recursive:true});const report={status:'PASS',browser:browser.version(),groups:['native AudioContext closes on synthetic pagehide','pageshow does not autoplay or change pattern','manual preview creates fresh working context and stops','project JSON unchanged and no external application requests'],not_tested:['actual navigation bfcache eligibility','physical speaker output','Android or other browsers']};fs.writeFileSync(out,JSON.stringify(report,null,2));console.log(report);
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
