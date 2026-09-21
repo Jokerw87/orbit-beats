@@ -1,5 +1,9 @@
 # 星轨节拍 / Orbit Beats V1.2
 
+![星轨节拍载入八十BPM原创示例后的四轨十六步编排界面](preview.png)
+
+实际桌面截图，使用原创合成编排。下载完整仓库并解压，打开 `index.html`，在“载入作品 JSON”选择随附 `example-project.json` 可复现编排。载入不会自动播放；试听前调低设备音量。保持文件同目录，不要只下载HTML或在ZIP预览里运行。无需账号或安装依赖；此仓库不是在线托管应用。截图不是声音试听验收。
+
 An original small browser instrument: edit four 16-step tracks, see a constellation, preview synthesized sound and export PCM WAV or a matching PNG. No AI API, samples, microphone or network.
 
 打开 `index.html`，点亮节拍格，再点击“试听一段”。请先调低设备音量。可以导出4轮节拍加尾音的22050Hz单声道16位WAV，或800×800星轨PNG。修改会立即停止旧试听，导出用最新节拍。试听音量只影响预览；WAV使用固定限幅，不替代设备音量控制。
